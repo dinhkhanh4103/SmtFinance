@@ -41,7 +41,7 @@ const LoanOnlineProposalScreen = () => {
 
   const[paymentMethod, setPaymentMethod] = useState();
   return (
-    <AppBlock style={{width:'100%'}} flex background='white' alignItems='center' pt={AppConstant.TOP} justifyContent="space-between">
+    <AppBlock style={{width:'100%'}} flex background='white' alignItems='center' pt={AppConstant.TOP} justifyContent="space-between" pb={AppConstant.BOTTOM}>
       <AppBlock style={{width:'95%'}} flex>
         <HeaderBack title ={t('online_loan')} iconRight={faCirclePlus} onPressIconRight={()=>{navigation.navigate('HistoriesTradeScreen')}}/>
         <AppText size={24} weight="600" semiBold>{t('loan_proposal')}</AppText>
@@ -128,7 +128,7 @@ const LoanOnlineProposalScreen = () => {
               </AppBlock>
             </AppBlock>
           </ScrollView>
-              <AppBlock mb={12}>
+              <AppBlock>
                 <AppButton name={t('confirm')} disable={agree? false : true} onPress={()=>navigation.navigate('CheckInformationLoanScreen')}/>
               </AppBlock>
       </AppBlock>

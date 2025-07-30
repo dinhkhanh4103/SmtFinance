@@ -6,6 +6,7 @@ import light from '../../theme/light';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const DatePickerInput = () => {
   const [selected, setSelected] = useState<Date>();
@@ -64,17 +65,73 @@ const DatePickerInput = () => {
             }}
             mode="single"
             styles={{
+              
               ...defaultStyles,
+              day:{
+                color:'black'
+              },
+              day_label: {
+                color: 'black', // màu chữ label nếu có dùng label riêng
+              },
               today: {
                 borderColor: light.Primary,
                 borderWidth: 1,
                 borderRadius: '50%',
+              },
+              today_label:{
+                color: light.Primary
               },
               selected: {
                 backgroundColor: light.Primary,
                 borderRadius: '50%',
               },
               selected_label: { color: 'white' },
+              header:{
+                backgroundColor: light.Primary,
+                color: light.Primary,
+              },
+              month:{
+                borderColor: light.Primary,
+                borderWidth:1,
+                borderRadius:8
+              },
+              month_label: {
+                color: light.Primary, // Màu chữ tháng
+                fontWeight: 'bold',
+              },
+              month_selector:{
+                backgroundColor: light.Primary
+              },
+              month_selector_label:{
+                color:'white',
+              },
+              year_label: {
+                color: light.Primary, // Màu chữ năm
+                fontWeight: 'bold',
+              },
+              year:{
+                borderColor: light.Primary,
+                borderWidth:1,
+                borderRadius:8
+              },
+              active_year_label:{
+                color: 'white'
+              },
+              active_year:{
+                backgroundColor: light.Primary
+              },
+              selected_year:{
+                backgroundColor: light.Primary
+              },
+              selected_year_label:{
+                color: 'white'
+              },
+              selected_month:{
+                backgroundColor: light.Primary
+              },
+              selected_month_label:{
+                color: 'white'
+              },
             }}
           />
         </View>

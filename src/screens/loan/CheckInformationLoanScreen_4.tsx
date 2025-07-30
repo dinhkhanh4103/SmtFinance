@@ -21,10 +21,10 @@ const CheckInformationLoanScreen_4 = ({navigation}: any) => {
     const [nextNumber, setNextNumber] = useState(3);
   return (
     <AppSafeAreaView>
-        <AppBlock style={{width:'95%', height: "100%"}} justifyContent='space-between'>
-            <AppBlock>
+        <AppBlock flex style={{width:'95%', height: "100%"}} justifyContent='space-between'>
+            <AppBlock flex>
                 <HeaderBack title={t('online_loan')}/>
-                <AppBlock>
+                <AppBlock flex>
                     <AppText size={24} weight='600' semiBold>{t('check_loan_conditions')}</AppText>
                     <AppText size={14} weight='400' regular mt={4}>{t('complete_info_steps')}</AppText>
                     <AppText size={20} weight='600' semiBold color={light.Primary} mt={4}>4/6</AppText>
@@ -33,7 +33,7 @@ const CheckInformationLoanScreen_4 = ({navigation}: any) => {
                         data={contactPersons}
                         showsVerticalScrollIndicator={false}
                         keyExtractor={(_, index) => index.toString()}
-                        style={{height: '73%', marginTop:12}}
+                        style={{height: '73%', marginTop:12, flex:1}}
                         renderItem={({item})=>(
                             <AppBlock>
                                     <AppBlock mt={8}>
@@ -63,7 +63,7 @@ const CheckInformationLoanScreen_4 = ({navigation}: any) => {
                     />
                 </AppBlock>
             </AppBlock>
-            <AppBlock style={{position:"absolute", bottom:0, width:"100%"}}>  
+            <AppBlock>  
                 <TouchableOpacity onPress={()=>{
                     const newContactPersons = [...contactPersons, nextNumber];
                     setContactPersons(newContactPersons);

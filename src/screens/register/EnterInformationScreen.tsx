@@ -14,6 +14,7 @@ import DatePickerInput from '../../components/input/DatePickerInput'
 import DropDown from '../../components/input/DropDown'
 import AppModal from '../../components/view/AppModal'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppConstant from '../../config/AppConstant'
 
 const { width, height } = Dimensions.get('window');
 const EnterInformationScreen = ({navigation}:any) => {
@@ -24,7 +25,7 @@ const EnterInformationScreen = ({navigation}:any) => {
         navigation.navigate('SignUpSuccessScreen');
     }
   return (
-    <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
+    <AppBlock style={{flex:1, backgroundColor:'white'}} pt={AppConstant.TOP} pb={AppConstant.BOTTOM}>
 
         <AppBlock flex background='white' alignItems='center' justifyContent='center'>
             <ImageBackground
@@ -102,7 +103,7 @@ const EnterInformationScreen = ({navigation}:any) => {
                 </AppScreenWrapper>
             </ImageBackground>
         </AppBlock>
-    </SafeAreaView>
+    </AppBlock>
   )
 }
 

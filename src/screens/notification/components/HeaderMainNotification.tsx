@@ -19,7 +19,7 @@ const HeaderMainNotification = () => {
   return(
     <LinearGradient colors={["#DFAE66","#FFFFFF"]} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ width:'100%', height: 350, borderBottomRightRadius:16, borderBottomLeftRadius: 16,}}>
         <AppBlock mt={AppConstant.TOP} alignItems='center'>
-            <AppBlock row justifyContent='space-between' style={{width:'95%'}} radius={16} border={1} borderColor='#C6C6C6' background='#FFFFFF66' ph={12} pv={8} height={60}>
+            <AppBlock row alignItems='center' justifyContent='space-between' style={{width:'95%'}} radius={16} border={1} borderColor='#C6C6C6' background='#FFFFFF66' ph={12} pv={8} height={60}>
                 <TouchableOpacity>
                     <AppBlock row style={{}}>
                         <AppBlock style={{}}>

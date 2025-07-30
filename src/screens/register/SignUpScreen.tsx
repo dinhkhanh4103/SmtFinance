@@ -11,6 +11,7 @@ import AppTextInput from '../../components/input/AppTextInput'
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
 import AppButton from '../../components/button/AppButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppConstant from '../../config/AppConstant'
 
 const { width, height } = Dimensions.get('window');
 const SignUpScreen = ({navigation}:any) => {
@@ -20,7 +21,7 @@ const SignUpScreen = ({navigation}:any) => {
         navigation.navigate('SignUpOTPScreen');
     }
   return (
-    <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
+    <AppBlock style={{flex:1, backgroundColor:'white'}} pt={AppConstant.TOP} pb={AppConstant.BOTTOM}>
 
         <AppBlock flex background='white' alignItems='center' justifyContent='center'>
             <ImageBackground
@@ -87,7 +88,7 @@ const SignUpScreen = ({navigation}:any) => {
                 </AppScreenWrapper>
             </ImageBackground>
         </AppBlock>
-    </SafeAreaView>
+    </AppBlock>
   )
 }
 

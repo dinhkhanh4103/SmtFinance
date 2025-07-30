@@ -24,7 +24,7 @@ const BottomTabNavigator = ( {navigation} : any ) => {
     const { t } = useTranslation();
   return (
     <Tab.Navigator screenOptions={{tabBarShowLabel: false, tabBarStyle:{
-        height: 95,
+        height: 70,
     }}}>
       <Tab.Screen name="Home" component={HomeScreen} options={{
         title: 'Trang chủ',

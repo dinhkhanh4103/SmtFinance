@@ -9,6 +9,7 @@ import Slider from '../components/view/Slider'
 import { title } from '../i18n/locales/en'
 import AppButton from '../components/button/AppButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppConstant from '../config/AppConstant'
 
 const { width, height } = Dimensions.get('window');
 const widthSlider = width * 0.8
@@ -26,7 +27,7 @@ const FlashScreen = ({navigation}: any) => {
     }
   return (
     <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
-      <AppBlock flex background='white' justifyContent='space-between'>
+      <AppBlock flex background='white' justifyContent='space-between' pb={AppConstant.BOTTOM}>
         <ImageBackground
           source={require('../../assets/images/background.png')}
           style={styles.background}

@@ -15,6 +15,7 @@ import AppButton from '../../components/button/AppButton';
 import AppScreenWrapper from '../../components/view/AppScreenWrapper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderBack from '../../components/header/HeaderBack';
+import AppConstant from '../../config/AppConstant';
 
 const { width, height } = Dimensions.get('window');
 const BiometricScreen = ({navigation}:any) => {
@@ -26,7 +27,7 @@ const BiometricScreen = ({navigation}:any) => {
 
     }
   return (
-    <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
+    <AppBlock style={{flex:1, backgroundColor:'white'}} pt={AppConstant.TOP} pb={AppConstant.BOTTOM}>
 
       <AppBlock flex background='white' alignItems='center' justifyContent='center'>
           <ImageBackground
@@ -50,13 +51,13 @@ const BiometricScreen = ({navigation}:any) => {
                     <AppBlock mv={12}>
                         <AppButton name={t('face_authentication')}/>    
                     </AppBlock>
-                    <AppButton name={t('do_it_later')} backgroundColor='#fff' textColor={light.Primary}/>
+                    <AppButton onPress={()=>navigation.goBack()} name={t('do_it_later')} backgroundColor='#fff' textColor={light.Primary}/>
                 </AppBlock>
               </AppBlock>
             </AppScreenWrapper>
           </ImageBackground>
       </AppBlock>
-    </SafeAreaView>
+    </AppBlock>
   )
 }
 const styles = StyleSheet.create({

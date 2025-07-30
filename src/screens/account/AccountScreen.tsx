@@ -9,10 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowRightFromBracket, faArrowsLeftRight, faBuildingColumns, faDollar, faLocation, faLocationDot, faLock, faShareNodes, faWallet } from '@fortawesome/free-solid-svg-icons'
 import { faClock, faHeart, faStar } from '@fortawesome/free-regular-svg-icons'
 import { useNavigation } from '@react-navigation/native'
+import { useAuthStore } from '../../store/authStore'
 
 const AccountScreen = () => {
   const {t} = useTranslation();
   const navigation = useNavigation();
+  const {logout} = useAuthStore();
+  function handleLogout(){  
+    logout();
+  }
   return (
     <AppBlock flex background='white'>
       <AccountHeader/>
@@ -157,7 +162,7 @@ const AccountScreen = () => {
               </TouchableOpacity>
             </AppBlock>
           </AppBlock>
-          <TouchableOpacity style={{width:'100%', backgroundColor:'#FFCBCB', alignItems:'center'}}>
+          <TouchableOpacity style={{width:'100%', backgroundColor:'#FFCBCB', alignItems:'center'}} onPress={handleLogout}>
                 <AppBlock row pv={12} alignItems='center' style={{width:'95%'}}>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} color='#DE4B4B' size={20}/>

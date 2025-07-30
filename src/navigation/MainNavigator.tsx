@@ -60,6 +60,8 @@ import CheckQuickLoanScreen_3 from '../screens/loan/CheckQuickLoanScreen_3';
 import LanguageScreen from '../screens/language/LanguageScreen';
 import NotificationScreen from '../screens/notification/NotificationScreen';
 import HistoriesScoreScreen from '../screens/score/HistoriesScoreScreen';
+import TipScoreScreen from '../screens/score/TipScoreScreen';
+import InformationScoreScreen from '../screens/score/InformationScoreScreen';
 
 
 
@@ -141,7 +143,9 @@ const MainNavigator = () => {
       <Stack.Screen name='NotificationScreen' component={NotificationScreen}/>
 
       <Stack.Screen name='HistoriesScoreScreen' component={HistoriesScoreScreen}/>
-      
+      <Stack.Screen name='TipScoreScreen' component={TipScoreScreen}/>
+      <Stack.Screen name='InformationScoreScreen' component={InformationScoreScreen}/>
+
       {/* <Stack.Screen name='RequestSupport' component={RequestSupport}/> */}
     </Stack.Navigator>
   );

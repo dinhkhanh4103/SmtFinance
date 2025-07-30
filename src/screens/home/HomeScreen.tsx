@@ -28,7 +28,7 @@ const HomeScreen = () => {
   const listComponent = [0,1,2,3,4,5,6,7,8,9,10]
   const imageBanner1 = require('../../../assets/images/banner_home.png')
   const imageBanner2 = require('../../../assets/images/banner_home_2.png')
-  const isAuthentic = true
+  const isAuthentic = false
   function onPressSeeMoreRequestSupport(){
     
   }

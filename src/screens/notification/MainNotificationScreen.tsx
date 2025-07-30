@@ -25,14 +25,14 @@ const MainNotificationScreen = () => {
                                 <Image source={require('../../../assets/icons/icon_history_point.png')}/>
                                 <AppText mt={4} size={12} weight='400' style={{textAlign:'center'}}>{t('point_history')}</AppText>
                             </AppBlock>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{width:'18%'}}>
+                        </TouchableOpacity >
+                        <TouchableOpacity style={{width:'18%'}} onPress={()=>navigation.navigate('TipScoreScreen')}>
                             <AppBlock alignItems='center'>
                                 <Image source={require('../../../assets/icons/icon_score_increase.png')}/>
                                 <AppText mt={4} size={12} weight='400' style={{textAlign:'center'}}>{t('tips_to_increase_points')}</AppText>
                             </AppBlock>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:'18%'}}>
+                        <TouchableOpacity style={{width:'18%'}} onPress={()=>navigation.navigate('InformationScoreScreen')}>
                             <AppBlock alignItems='center'>
                                 <Image source={require('../../../assets/icons/icon_info_score.png')}/>
                                 <AppText mt={4} size={12} weight='400' style={{textAlign:'center'}}>{t('point_information')}</AppText>
@@ -71,7 +71,7 @@ const MainNotificationScreen = () => {
                             </AppBlock>
                             <AppBlock style={{position:'absolute', bottom:-12, left:150 - 35, width:70}} alignItems='center'>
                                 <Image source={require('../../../assets/icons/icon_mu_ban_xe.png')}/>
-                                <AppText size={12} weight='500'>{t('buy_sell_car')}</AppText>    
+                                <AppText size={12} weight='500'>{t('buy_sell')}</AppText>    
                             </AppBlock>
                             <AppBlock style={{position:'absolute', top:150 -25, left:-30, width:60, height:50}} alignItems='center' justifyContent='center'>
                                 <Image source={require('../../../assets/icons/icon_shopping.png')}/>

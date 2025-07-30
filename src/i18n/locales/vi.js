@@ -260,12 +260,17 @@ module.exports = {
   "overview": "Tổng quan",
   "shopping": "Mua sắm",
   "credit": "Tín dụng",
-  "buy_sell_car": "Mua/bán xe",
+  "buy_sell": "Mua/bán",
   "support": "Hỗ trợ",
   "authenticate": "Xác thực",
   "point_history": "Lịch sử điểm",
   "scores": "Điểm",
   "scores_increase": "Tăng điểm",
   "scores_decrease": "Giảm điểm",
-  "scores_unchanged": "Điểm không đổi"
+  "scores_unchanged": "Điểm không đổi",
+  "consumption": "Tiêu dùng",
+  "face_verification": "Xác thực khuôn mặt",
+  "share_gps_location": "Chia sẻ vị trí GPS",
+  "id_passport_verification": "Xác thực CMND/CCCD/Hộ chiếu",
+  "register_bankcs": "Đăng ký BankCS"
 };

@@ -14,6 +14,7 @@ import OTPInput from '../../components/input/OTPInput'
 import ImageSlider from '../../components/view/ImageSlider'
 import App from '../../../App'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppConstant from '../../config/AppConstant'
 
 const { width, height } = Dimensions.get('window');
 const ChangePasswordSuccess = ({navigation}:any) => {
@@ -23,7 +24,7 @@ const ChangePasswordSuccess = ({navigation}:any) => {
         navigation.navigate('EnterInformationScreen');
     }
   return (
-    <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
+    <AppBlock style={{flex:1, backgroundColor:'white'}} pt={AppConstant.TOP} pb={AppConstant.BOTTOM}>
 
         <AppBlock flex background='white' alignItems='center' justifyContent='center'>
             <ImageBackground
@@ -56,7 +57,7 @@ const ChangePasswordSuccess = ({navigation}:any) => {
                 </AppScreenWrapper>
             </ImageBackground>
         </AppBlock>
-    </SafeAreaView>
+    </AppBlock>
   )
 }
 

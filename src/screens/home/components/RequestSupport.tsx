@@ -86,14 +86,14 @@ export default function RequestSupport() {
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
                   <AppBlock row height={140} mt={12} alignItems='center' radius={8} border={1} borderColor={light.Primary} ph={12} justifyContent='space-between'>
-                      <AppBlock width={138} height={113}>
+                      <AppBlock style={{width:138, height:113}}>
                         <Image style={{width: '100%', height: '100%', borderRadius: 8}} resizeMode='cover' source={item.image}/>
                       </AppBlock>
-                      <AppBlock justifyContent='space-between' height={113}>
-                        <AppText size={16} weight='500'>{item.title}</AppText>
+                      <AppBlock justifyContent='space-between' height={113} ml={4}>
+                        <AppText size={14} weight='500'>{item.title}</AppText>
                         <AppBlock row alignItems='center'>
                           <AppText size={12} weight='500'>{t('support_amount')}:</AppText>
-                          <AppText ml={4} size={16} weight='500' color={light.Primary}>{item.amount}</AppText>
+                          <AppText size={14} weight='500' color={light.Primary}>{item.amount}</AppText>
                         </AppBlock>
                         <AppText size={12} weight='500'>{t('support_duration')}: {item.duration}</AppText>
                         <AppText size={12} weight='500'>{t('support_location')}: {item.location}</AppText>

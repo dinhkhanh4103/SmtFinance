@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import light from '../../theme/light';
 import AppBlock from '../view/AppBlock';
+import AppText from '../text/AppText';
 
 const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
   const [visible, setVisible] = useState(false);
@@ -38,7 +39,7 @@ const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
             ]}
           />
         :
-          <AppBlock></AppBlock>
+          null
         }
           <Text style={styles.selectedText}>{selectedLabel}</Text>
       </View>
@@ -72,7 +73,7 @@ const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
                   style={styles.item}
                   onPress={() => handleSelect(item)}
                 >
-                  <Text style={styles.itemText}>{item.label}</Text>
+                  <AppText style={styles.itemText}>{item.label}</AppText>
                 </TouchableOpacity>
               )}
             />

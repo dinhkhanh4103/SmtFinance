@@ -25,6 +25,7 @@ function Main() {
 
   return (
     <PaperProvider theme={theme}>
+      <StatusBar backgroundColor="transparent"/>
       <AppNavigation />
     </PaperProvider>
   );

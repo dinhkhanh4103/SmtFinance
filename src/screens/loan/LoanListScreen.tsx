@@ -10,6 +10,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import AppButton from '../../components/button/AppButton';
 import light from '../../theme/light';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import AppConstant from '../../config/AppConstant';
 
 const LoanListScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
@@ -67,7 +68,7 @@ const LoanListScreen = ({ navigation }: any) => {
   
 ];
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <AppBlock style={{ flex: 1, backgroundColor: 'white' }} pt={AppConstant.TOP} pb={AppConstant.BOTTOM}>
       <AppBlock flex alignItems="center">
         <AppBlock style={{ width: '95%' }}>
           <HeaderBack title={t('loan_list')} iconRight={faCirclePlus} onPressIconRight={()=>{navigation.navigate('HistoriesLoanScreen')}}/>
@@ -128,7 +129,7 @@ const LoanListScreen = ({ navigation }: any) => {
                     />
                   </AppBlock>
                   <AppBlock justifyContent="space-between" height={113}>
-                    <AppText size={16} weight="500">
+                    <AppText size={14} weight="500">
                       {item.title}
                     </AppText>
                     <AppBlock row alignItems="center">
@@ -137,7 +138,7 @@ const LoanListScreen = ({ navigation }: any) => {
                       </AppText>
                       <AppText
                         ml={4}
-                        size={16}
+                        size={14}
                         weight="500"
                         color={light.Primary}
                       >
@@ -168,7 +169,7 @@ const LoanListScreen = ({ navigation }: any) => {
           </AppBlock>
         </AppBlock>
       </AppBlock>
-    </SafeAreaView>
+    </AppBlock>
   );
 };
 

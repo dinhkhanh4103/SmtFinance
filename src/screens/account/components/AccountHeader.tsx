@@ -19,7 +19,7 @@ const AccountHeader = () => {
   return(
     <LinearGradient colors={["#DFAE66","#FFFFFF"]} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ width:'100%', height: 134, borderBottomRightRadius:16, borderBottomLeftRadius: 16,}}>
         <AppBlock mt={AppConstant.TOP} alignItems='center'>
-            <AppBlock row justifyContent='space-between' style={{width:'95%'}} radius={16} border={1} borderColor='#C6C6C6' background='#FFFFFF66' ph={12} pv={8} height={60}>
+            <AppBlock alignItems='center' row justifyContent='space-between' style={{width:'95%', height:60}} radius={16} border={1} borderColor='#C6C6C6' background='#FFFFFF66' ph={12} pv={8}>
                 <TouchableOpacity onPress={()=>{
                     auth ? navigation.navigate('InformationScreen') : navigation.navigate('VerificationInformationScreen_1')
                 }}>
@@ -33,9 +33,9 @@ const AccountHeader = () => {
                                 <AppBlock mt={4}>
                                     {auth
                                     ?
-                                        <AppButton name='Đã xác thực' width={96} heigth={27} textStyle={{fontSize:12}}/>
+                                        <AppButton name='Đã xác thực' width={96} heigth={20} textStyle={{fontSize:12}}/>
                                     :
-                                        <AppButton name='Chưa xác thực' width={96} heigth={27} textStyle={{fontSize:12}}/>
+                                        <AppButton name='Chưa xác thực' width={96} heigth={20} textStyle={{fontSize:12}}/>
                                     }
                                 </AppBlock>
                             </AppBlock>

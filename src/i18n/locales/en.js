@@ -260,12 +260,17 @@ module.exports = {
   "overview": "Overview",
   "shopping": "Shopping",
   "credit": "Credit",
-  "buy_sell_car": "Buy/Sell Car",
+  "buy_sell": "Buy/Sell Car",
   "support": "Support",
   "authenticate": "Authenticate",
   "point_history": "Point History",
   "scores": "Scores",
   "scores_increase": "Scores Increase",
   "scores_decrease": "Scores Decrease",
-  "scores_unchanged": "Scores Unchanged"
+  "scores_unchanged": "Scores Unchanged",
+  "consumption": "Consumption",
+  "face_verification": "Face Verification",
+  "share_gps_location": "Share GPS Location",
+  "id_passport_verification": "ID/Passport Verification",
+  "register_bankcs": "Register BankCS"
 };

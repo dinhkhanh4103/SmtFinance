@@ -73,9 +73,9 @@ const HistoriesScoreScreen = () => {
                         <AppText size={16} weight='500' color={selected =='loan' ? light.Primary : '#8C8C8C'}>{t('loan')}</AppText>
                     </AppBlock>
                 </TouchableOpacity>
-                <TouchableOpacity style={{width:'33%'}} onPress={()=>setSelected('buy_sell_car')}>
-                    <AppBlock style={{width:'100%', borderBottomWidth: 4, borderBottomColor: selected == 'buy_sell_car' ? light.Primary : 'transparent', paddingBottom:12}} alignItems='center'>
-                        <AppText size={16} weight='500' color={selected =='buy_sell_car' ? light.Primary : '#8C8C8C'}>{t('buy_sell_car')}</AppText>
+                <TouchableOpacity style={{width:'33%'}} onPress={()=>setSelected('buy_sell')}>
+                    <AppBlock style={{width:'100%', borderBottomWidth: 4, borderBottomColor: selected == 'buy_sell' ? light.Primary : 'transparent', paddingBottom:12}} alignItems='center'>
+                        <AppText size={16} weight='500' color={selected =='buy_sell' ? light.Primary : '#8C8C8C'}>{t('buy_sell')}</AppText>
                     </AppBlock>
                 </TouchableOpacity>
                 <TouchableOpacity style={{width:'33%'}} onPress={()=>setSelected('scores')}>
@@ -92,7 +92,7 @@ const HistoriesScoreScreen = () => {
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => <HistoriesScoreItem item={item} />}
-                    style={{ flex: 1 }}
+                    style={{ flex: 1}}
                 />
             :
                 null
