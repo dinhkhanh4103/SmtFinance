@@ -272,5 +272,21 @@ module.exports = {
   "face_verification": "Face Verification",
   "share_gps_location": "Share GPS Location",
   "id_passport_verification": "ID/Passport Verification",
-  "register_bankcs": "Register BankCS"
+  "register_bankcs": "Register BankCS",
+  "referral_link": "Referral Link",
+  "scan_qr_code": "Scan QR Code",
+  "copy": "Copy",
+  "referral_code": "Referral Code",
+  "current_password": "Current Password",
+  "biometric_security": "Biometric Security",
+  "fingerprint_security": "Fingerprint Security",
+  "face_security": "Face Security",
+  "two_step_authentication": "Two-Step Authentication",
+  "smartotp_authentication": "SmartOTP Authentication",
+  "enter_current_password": "Enter current password",
+  "save_changes": "Save Changes",
+  "service_rating_question": "How do you rate our service? All feedback is valuable and helps us improve and develop",
+  "feedback_content": "Feedback Content",
+  "enter_content": "Enter content",
+  "rate": "Rate"
 };

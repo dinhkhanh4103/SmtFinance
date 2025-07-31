@@ -15,6 +15,7 @@ import DropDown from '../../components/input/DropDown';
 import AppTextInput from '../../components/input/AppTextInput';
 import DatePickerInput from '../../components/input/DatePickerInput';
 import { Screen } from 'react-native-screens';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
 const VerificationInformationScreen_2 = ({ navigation }: any) => {
@@ -88,61 +89,63 @@ const VerificationInformationScreen_2 = ({ navigation }: any) => {
     const [openModal, setOpenModal] = useState(false);
   return (
     <AppSafeAreaView>
-      <AppBlock style={{ width: '95%', height: '100%' }} justifyContent='space-between'>
-        <AppBlock>
+      <AppBlock flex style={{ width: '95%', height: '100%' }} justifyContent='space-between'>
+        <AppBlock flex>
           <HeaderBack title={t('personal_info_verification')} />
+          <ScrollView style={{flex:1}}>
 
-          <AppBlock>
-            <AppText size={20} weight='600' semiBold color={light.Primary} mt={4}>2/2</AppText>
-            <AppText size={20} weight='600' semiBold color={light.Primary} mt={4}>{t('identity_document_info')}</AppText>
-            
-            <AppBlock mt={12}>
-                <AppText size={16} weight='400'>{t('document_type')}</AppText>
-                <DropDown
-                    placeholder={t('select_province_city')}
-                    data={[
-                        { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
-                        { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
-                        { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
-                    ]}
-                    value={documentType} // <-- THÊM DÒNG NÀY
-                     onChange={(value : any) => setDocumentType(value)}
-                />
-            </AppBlock>
-            <AppBlock mt={8}>
-                <AppText size={16} weight='400'>{t('identity_document_number')}</AppText>
-                <AppTextInput placeholder='Căn cước công dân có gắn chip'/>
-            </AppBlock>
-            {/* Front */}
-            <AppBlock mt={8}>
-                <AppText  size={16} weight='400'>{t('front_photo')}</AppText>
-                <AppBlock alignItems='center' justifyContent='center' width={80} mt={8}>
-                    <TouchableOpacity style={{alignItems:"center"}} onPress={()=>openCamera('front')}>            
-                        <Image source={require('../../../assets/images/upload_image.png')}/>
-                    </TouchableOpacity>
-                </AppBlock>
-            </AppBlock>
+            <AppBlock>
+              <AppText size={20} weight='600' semiBold color={light.Primary} mt={4}>2/2</AppText>
+              <AppText size={20} weight='600' semiBold color={light.Primary} mt={4}>{t('identity_document_info')}</AppText>
+              
+              <AppBlock mt={12}>
+                  <AppText size={16} weight='400'>{t('document_type')}</AppText>
+                  <DropDown
+                      placeholder={t('select_province_city')}
+                      data={[
+                          { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
+                          { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
+                          { label: t('Căn cước công dân có gắn chip'), value: 'cccd' },
+                      ]}
+                      value={documentType} // <-- THÊM DÒNG NÀY
+                      onChange={(value : any) => setDocumentType(value)}
+                  />
+              </AppBlock>
+              <AppBlock mt={8}>
+                  <AppText size={16} weight='400'>{t('identity_document_number')}</AppText>
+                  <AppTextInput placeholder='Căn cước công dân có gắn chip'/>
+              </AppBlock>
+              {/* Front */}
+              <AppBlock mt={8}>
+                  <AppText  size={16} weight='400'>{t('front_photo')}</AppText>
+                  <AppBlock alignItems='center' justifyContent='center' width={80} mt={8}>
+                      <TouchableOpacity style={{alignItems:"center"}} onPress={()=>openCamera('front')}>            
+                          <Image source={require('../../../assets/images/upload_image.png')}/>
+                      </TouchableOpacity>
+                  </AppBlock>
+              </AppBlock>
 
-            {/* Back */}
-            <AppBlock mt={8}>
-                <AppText  size={16} weight='400'>{t('back_photo')}</AppText>
-                <AppBlock alignItems='center' justifyContent='center' width={80} mt={8}>
-                    <TouchableOpacity style={{alignItems:"center"}} onPress={()=>openCamera('back')}>            
-                        <Image source={require('../../../assets/images/upload_image.png')}/>
-                    </TouchableOpacity>
-                </AppBlock>
-            </AppBlock>
+              {/* Back */}
+              <AppBlock mt={8}>
+                  <AppText  size={16} weight='400'>{t('back_photo')}</AppText>
+                  <AppBlock alignItems='center' justifyContent='center' width={80} mt={8}>
+                      <TouchableOpacity style={{alignItems:"center"}} onPress={()=>openCamera('back')}>            
+                          <Image source={require('../../../assets/images/upload_image.png')}/>
+                      </TouchableOpacity>
+                  </AppBlock>
+              </AppBlock>
 
-            <AppBlock mt={8}>
-                <AppText size={16} weight='400'>{t('issue_date')}</AppText>
-                <DatePickerInput/>
-            </AppBlock>
+              <AppBlock mt={8}>
+                  <AppText size={16} weight='400'>{t('issue_date')}</AppText>
+                  <DatePickerInput/>
+              </AppBlock>
 
-            <AppBlock mt={8}>
-                <AppText size={16} weight='400'>{t('place_of_issue')}</AppText>
-                <AppTextInput placeholder={t('enter_information')}/>
+              <AppBlock mt={8}>
+                  <AppText size={16} weight='400'>{t('place_of_issue')}</AppText>
+                  <AppTextInput placeholder={t('enter_information')}/>
+              </AppBlock>
             </AppBlock>
-          </AppBlock>
+          </ScrollView>
         </AppBlock>
         <AppBlock>
             <AppButton

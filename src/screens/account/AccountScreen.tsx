@@ -46,7 +46,7 @@ const AccountScreen = () => {
                 <AppBlock style={{height:1, backgroundColor:'#DCDCDC'}}/>
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('RatingsScreen')}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_star.png')}/> 
@@ -88,7 +88,7 @@ const AccountScreen = () => {
 
             <AppBlock mt={8} >
               <AppText size={16} weight='600' semiBold>{t('settings')}</AppText>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('AboutScreen')}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_share.png')}/> 
@@ -98,7 +98,7 @@ const AccountScreen = () => {
                 <AppBlock style={{height:1, backgroundColor:'#DCDCDC'}}/>
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('SecurityScreen')}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_security.png')}/> 

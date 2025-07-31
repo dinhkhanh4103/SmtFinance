@@ -62,6 +62,10 @@ import NotificationScreen from '../screens/notification/NotificationScreen';
 import HistoriesScoreScreen from '../screens/score/HistoriesScoreScreen';
 import TipScoreScreen from '../screens/score/TipScoreScreen';
 import InformationScoreScreen from '../screens/score/InformationScoreScreen';
+import AboutScreen from '../screens/account/AboutScreen';
+import SecurityScreen from '../screens/account/SecurityScreen';
+import RatingsScreen from '../screens/account/RatingsScreen';
+import FavoritesItem from '../screens/account/components/FavoritesItem';
 
 
 
@@ -134,6 +138,10 @@ const MainNavigator = () => {
       <Stack.Screen name='CustomCameraScreen' component={CustomCameraScreen}/>
 
       <Stack.Screen name='InformationScreen' component={InformationScreen}/>
+      <Stack.Screen name='AboutScreen' component={AboutScreen}/>
+      <Stack.Screen name='SecurityScreen' component={SecurityScreen}/>
+      <Stack.Screen name='RatingsScreen' component={RatingsScreen}/>
+      <Stack.Screen name='FavoritesItem' component={FavoritesItem}/>
 
       <Stack.Screen name='VerificationInformationScreen_1' component={VerificationInformationScreen_1}/>
       <Stack.Screen name='VerificationInformationScreen_2' component={VerificationInformationScreen_2}/>

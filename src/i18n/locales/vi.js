@@ -272,5 +272,21 @@ module.exports = {
   "face_verification": "Xác thực khuôn mặt",
   "share_gps_location": "Chia sẻ vị trí GPS",
   "id_passport_verification": "Xác thực CMND/CCCD/Hộ chiếu",
-  "register_bankcs": "Đăng ký BankCS"
+  "register_bankcs": "Đăng ký BankCS",
+  "referral_link": "Link giới thiệu",
+  "scan_qr_code": "Quét mã QR",
+  "copy": "Sao chép",
+  "referral_code": "Mã giới thiệu",
+  "current_password": "Mật khẩu hiện tại",
+  "biometric_security": "Bảo mật sinh trắc học",
+  "fingerprint_security": "Bảo mật bằng vân tay",
+  "face_security": "Bảo mật bằng khuôn mặt",
+  "two_step_authentication": "Xác thực 2 bước",
+  "smartotp_authentication": "Xác thực SmartOTP",
+  "enter_current_password": "Nhập mật khẩu hiện tại",
+  "save_changes": "Lưu thay đổi",
+  "service_rating_question": "Bạn đánh giá thế nào về dịch vụ của chúng tôi? Mọi phản hồi đều đáng trân trọng và giúp chúng tôi cải thiện phát triển",
+  "feedback_content": "Nội dung góp ý",
+  "enter_content": "Nhập nội dung",
+  "rate": "Đánh giá"
 };
