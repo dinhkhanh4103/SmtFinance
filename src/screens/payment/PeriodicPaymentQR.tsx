@@ -10,7 +10,7 @@ import AppButton from '../../components/button/AppButton'
 import light from '../../theme/light'
 
 
-const PeriodicPayment = ({navigation}:any) => {
+const PeriodicPaymentQR = ({navigation}:any) => {
     const {t} = useTranslation();
   return (
     <AppSafeAreaView>
@@ -36,4 +36,4 @@ const PeriodicPayment = ({navigation}:any) => {
   )
 }
 
-export default PeriodicPayment
+export default PeriodicPaymentQR

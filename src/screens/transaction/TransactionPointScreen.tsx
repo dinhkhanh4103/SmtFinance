@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import HeaderBack from '../../components/header/HeaderBack'
 import light from '../../theme/light'
 import { transparent } from 'react-native-paper/lib/typescript/styles/themes/v2/colors'
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, UrlTile } from 'react-native-maps';
 import SearchBar from '../../components/input/SearchBar'
 import DistanceModal from './components/DistanceModal'
 
@@ -59,20 +59,24 @@ const TransactionPointScreen = ({navigation}: any) => {
                     </AppBlock>
                     <AppBlock background='#ccc' style={{width:'100%', height:512}} mt={12}>
                         <MapView
-                            provider="google"
+                            
                             style={{flex:1}}
                             initialRegion={{
-                            latitude: 21.0285,
-                            longitude: 105.8542,
-                            latitudeDelta: 0.05,
-                            longitudeDelta: 0.05,
+                                latitude: 21.0285, // Hà Nội
+                                longitude: 105.8542,
+                                latitudeDelta: 0.05,
+                                longitudeDelta: 0.05,
                             }}
                         >
+                            <UrlTile
+                                urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                maximumZ={19}
+                            />
                             <Marker
-                            coordinate={{ latitude: 21.0285, longitude: 105.8542 }}
-                            title="Hà Nội"
-                            description="Thủ đô Việt Nam"
-                            pinColor='red'
+                                coordinate={{ latitude: 21.0285, longitude: 105.8542 }}
+                                title="Hà Nội"
+                                description="Thủ đô Việt Nam"
+                                pinColor='red'
                             />
                         </MapView>
                     </AppBlock>

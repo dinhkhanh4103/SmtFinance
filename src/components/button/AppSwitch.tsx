@@ -6,8 +6,8 @@ const AppSwitch = ({isEnabled, toggleSwitch}: any) => {
   return (
     <AppBlock>
         <TouchableOpacity style={{width:40, height:24}} onPress={toggleSwitch}>
-            <AppBlock style={{width:40, height:24}} background={isEnabled? '#dcdcdc':'#00B71D'} radius={51} justifyContent='center'>
-                <AppBlock style={{position:'absolute', width:20, height:20, left: isEnabled ? 3 : 17}} background='white' radius={10}></AppBlock>
+            <AppBlock style={{width:40, height:24}} background={isEnabled ? '#00B71D' : '#dcdcdc'} radius={51} justifyContent='center'>
+                <AppBlock style={{position:'absolute', width:20, height:20, left: isEnabled ? 17 : 3}} background='white' radius={10}></AppBlock>
             </AppBlock>
         </TouchableOpacity>
     </AppBlock>

@@ -16,6 +16,7 @@ import light from '../theme/light';
 import TabIcon from '../components/view/TabIcon';
 import { useTranslation } from 'react-i18next';
 import MainNotificationScreen from '../screens/notification/MainNotificationScreen';
+import WalletScreen from '../screens/wallet/WalletScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,8 +34,8 @@ const BottomTabNavigator = ( {navigation} : any ) => {
           <TabIcon focused={focused} color={color} icon={faHome} label={t('home')}/>
         )
       }}/>
-      <Tab.Screen name="Trade" component={TradeScreen} options={{
-        title: 'Sàn giao dịch',
+      <Tab.Screen name="EWallet" component={WalletScreen} options={{
+        title: 'Ví điện tử',
         headerShown: false,
         tabBarIcon: ({ focused, color, }) => (
           <TabIcon focused={focused} color={color} icon={faWallet} label={t('trade')}/>

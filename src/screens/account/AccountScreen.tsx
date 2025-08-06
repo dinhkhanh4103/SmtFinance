@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
 import AppBlock from '../../components/view/AppBlock'
 import AppConstant from '../../config/AppConstant'
 import AppText from '../../components/text/AppText'
@@ -15,6 +15,7 @@ const AccountScreen = () => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const {logout} = useAuthStore();
+  const [showMethod, setShowMethod] = useState(false);
   function handleLogout(){  
     logout();
   }
@@ -26,7 +27,7 @@ const AccountScreen = () => {
           <AppBlock style={{width:'95%'}} mt={12}>
             <AppBlock>
               <AppText size={16} weight='600' semiBold>{t('personal')}</AppText>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('BankLinkScreen')}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_bank.png')}/> 
@@ -66,7 +67,7 @@ const AccountScreen = () => {
                 <AppBlock style={{height:1, backgroundColor:'#DCDCDC'}}/>
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>setShowMethod(true)}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_pay.png')}/> 
@@ -128,7 +129,7 @@ const AccountScreen = () => {
                 <AppBlock style={{height:1, backgroundColor:'#DCDCDC'}}/>
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>{navigation.navigate('SupportConsultationScreen')}}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_support.png')}/> 
@@ -141,7 +142,7 @@ const AccountScreen = () => {
 
             <AppBlock mt={8} >
               <AppText size={16} weight='600' semiBold>{t('terms_and_conditions')}</AppText>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('TernConditionScreen')}>
                 <AppBlock row pv={12} alignItems='center'>
                   <AppBlock width={20} height={20} alignItems='center' justifyContent='center'>
                     <Image source={require('../../../assets/icons/icon_sheld_user.png')}/> 
@@ -173,8 +174,74 @@ const AccountScreen = () => {
           </TouchableOpacity>
         </AppBlock>
       </ScrollView>
+      <Modal
+                                        visible={showMethod}
+                                        onRequestClose={()=>{setShowMethod(false)}}
+                                        animationType="slide"
+                                        transparent
+                                        >
+                                          <TouchableOpacity
+                                            style={styles.modalOverlay} // Vùng overlay mờ để đóng modal khi chạm bên ngoài
+                                            activeOpacity={1} // Đảm bảo toàn bộ overlay có thể chạm
+                                            onPressOut={()=>{setShowMethod(false)}} // Đóng modal khi chạm ra ngoài
+                                          >
+                                            <AppBlock flex background='rgba(0,0,0,0)' justifyContent='flex-end'>
+                                              <TouchableOpacity activeOpacity={1}>
+                                                <AppBlock style={{width:'100%', borderTopRightRadius: 12, borderTopLeftRadius: 12}} background='white' alignItems='center' pb={12}>
+                                                  <AppBlock style={{width:"100%"}} alignItems='center' pv={12}>
+                                                      <AppBlock width={60} height={4} background='#ccc'/>
+                                                  </AppBlock>
+                                                  <AppBlock style={{width:"100%"}}   height={1} background='#DCDCDC' mb={12}/>
+                                                  <AppBlock style={{width:"90%"}}>
+                                                    <AppBlock alignItems='center'>
+                                                      <AppText size={20} weight='600' semiBold>{t('payment_method')}</AppText> 
+                                                    </AppBlock>
+                                                    <TouchableOpacity onPress={()=>{navigation.navigate('PeriodicPaymentScreen')}}>
+                                                      <AppBlock style={{borderBottomWidth: 1, borderBottomColor:'#DCDCDC'}} pv={12}>
+                                                        <AppText size={16} weight='500'>{t('periodic_payment')}</AppText>
+                                                        <AppText size={14} weight='400' color='#8C8C8C'>{t('monthly_interest_principal_payment')}</AppText>
+                                                      </AppBlock>
+                                                    </TouchableOpacity>
+                                                    
+                                                    <TouchableOpacity onPress={()=>{setShowMethod(false); navigation.navigate('PrePaymentScreen')}}>
+                                                      <AppBlock style={{borderBottomWidth: 1, borderBottomColor:'#DCDCDC'}} pv={12}>
+                                                        <AppText size={16} weight='500'>{t('prepayment_principal')}</AppText>
+                                                        <AppText size={14} weight='400' color='#8C8C8C'>{t('deduct_from_principal_balance')}</AppText>
+                                                      </AppBlock>
+                                                    </TouchableOpacity>
+                                                  </AppBlock>
+                                                </AppBlock>
+                                              </TouchableOpacity>
+                                            </AppBlock>
+                                          </TouchableOpacity>
+                                      </Modal>
     </AppBlock>
   )
 }
-
+const styles = StyleSheet.create({
+    modalOverlay: {
+      flex: 1,
+      justifyContent: 'flex-end', // Căn chỉnh modal content xuống dưới cùng
+      backgroundColor: 'rgba(0, 0, 0, 0.4)', // Nền mờ cho modal
+      zIndex:10
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'transparent', // Có thể dùng 'rgba(0,0,0,0.2)' nếu muốn nền mờ
+        zIndex: 10, // Đảm bảo overlay nằm trên nội dung nhưng dưới menu
+    },
+    menuContainer: {
+        position: 'absolute',
+        top: 30, // Điều chỉnh vị trí Y để nó xuất hiện ngay dưới icon filter
+        right: 0, // Điều chỉnh vị trí X để nó xuất hiện bên phải icon filter
+        width: 200,
+        // height: 120, // Bỏ height cố định để nó tự co giãn theo nội dung
+        zIndex: 2, // Đảm bảo menu nằm trên overlay và các nội dung khác
+    },
+    // Bạn có thể thêm các style khác nếu cần
+});
 export default AccountScreen

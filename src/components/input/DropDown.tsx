@@ -12,6 +12,7 @@ import {
 import light from '../../theme/light';
 import AppBlock from '../view/AppBlock';
 import AppText from '../text/AppText';
+import ArrowDownSmallIcon from '../../../assets/icons/ArrowDownSmallIcon';
 
 const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
   const [visible, setVisible] = useState(false);
@@ -29,7 +30,7 @@ const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
         style={styles.dropdownContainer}
         onPress={() => setVisible(true)}
       > <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        {iconLeft?
+        {iconLeft&&
           <FontAwesomeIcon
             icon={iconLeft}
             size={20}
@@ -38,19 +39,10 @@ const DropDown = ({ data, value, onChange, placeholder, iconLeft } : any) => {
               visible && { color: light.Primary },
             ]}
           />
-        :
-          null
         }
-          <Text style={styles.selectedText}>{selectedLabel}</Text>
+          <Text style={{fontSize:16, color: selectedLabel == placeholder ? '#8C8C8C' : light.Primary}}>{selectedLabel}</Text>
       </View>
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          size={20}
-          style={[
-            styles.rightIcon,
-            visible && { color: light.Primary },
-          ]}
-        />
+        <ArrowDownSmallIcon/>
       </TouchableOpacity>
 
       <Modal

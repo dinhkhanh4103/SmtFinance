@@ -15,7 +15,7 @@ const AccountHeader = () => {
     const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? StatusBar.currentHeight || 24 : 44
     const user = useAuthStore(state => state.user)
     const { t } = useTranslation();
-    const auth = false;
+    const auth = true;
   return(
     <LinearGradient colors={["#DFAE66","#FFFFFF"]} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ width:'100%', height: 134, borderBottomRightRadius:16, borderBottomLeftRadius: 16,}}>
         <AppBlock mt={AppConstant.TOP} alignItems='center'>
