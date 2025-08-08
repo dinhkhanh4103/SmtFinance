@@ -21,11 +21,11 @@ const ContactProfileScreen = ({navigation}:any) => {
     const user = useAuthStore(state => state.user)
     const contact = user['contact'];
     const idCard = user['idCard']
-    const bottomSheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
-    const openSheet = () => {
-        bottomSheetRef.current?.snapToIndex(1); // Mở bottom sheet tại index 0
-    };
+    // const bottomSheetRef = useRef<BottomSheet>(null);
+    // const snapPoints = useMemo(() => ['25%', '50%'], []);
+    // const openSheet = () => {
+    //     bottomSheetRef.current?.snapToIndex(1); // Mở bottom sheet tại index 0
+    // };
   return (
    <AppSafeAreaView>
         <AppBlock style={{width:'100%'}}>
@@ -55,7 +55,7 @@ const ContactProfileScreen = ({navigation}:any) => {
                         <AppText size={16} weight='500' color='white'>{t('send_message')}</AppText>
                     </AppBlock>
                 </TouchableOpacity>
-                <TouchableOpacity style={{width:48, height:44}} onPress={openSheet}>
+                <TouchableOpacity style={{width:48, height:44}}>
                     <AppBlock style={{width:'100%', height:'100%'}} alignItems='center' justifyContent='center' background={light.Primary} radius={12}>
                         <FontAwesomeIcon icon={faEllipsis} color='white'/>
                         
@@ -101,7 +101,7 @@ const ContactProfileScreen = ({navigation}:any) => {
                     </AppBlock>
                 </AppBlock>
             </ScrollView>
-            <BottomSheet
+            {/* <BottomSheet
                 ref={bottomSheetRef}
                 index={-1} // index = -1 để sheet ban đầu đóng
                 snapPoints={snapPoints}
@@ -110,7 +110,7 @@ const ContactProfileScreen = ({navigation}:any) => {
                 <View style={{ flex: 1, alignItems: 'center' }}>
                 <Text>👋 Đây là nội dung trong Bottom Sheet</Text>
                 </View>
-            </BottomSheet>
+            </BottomSheet> */}
             
         </AppBlock>
    </AppSafeAreaView>

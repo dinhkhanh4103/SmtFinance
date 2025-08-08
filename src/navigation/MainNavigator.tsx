@@ -103,7 +103,7 @@ const Stack = createStackNavigator();
 
 const MainNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName='ContactProfileScreen' screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName='MainTabs' screenOptions={{ headerShown: false }}>
       <Stack.Screen name='MainTabs' component={BottomTabNavigator} />
       <Stack.Screen name='BiometricScreen' component={BiometricScreen}/>
       <Stack.Screen name='HomeScreen' component={HomeScreen} />
