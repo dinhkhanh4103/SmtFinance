@@ -7,8 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
-
-const DatePickerInput = () => {
+interface DatePickerInputProps {
+  value?: string;
+  onChange?: (value: string) => void;
+}
+const DatePickerInput: React.FC<DatePickerInputProps> = ({
+  value,
+  onChange,
+}) => {
   const [selected, setSelected] = useState<Date>();
   const [show, setShow] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -21,20 +27,14 @@ const DatePickerInput = () => {
           setShow(true);
           setIsFocused(true);
         }}
-        style={[
-          styles.inputBox,
-          isFocused && { borderColor: light.Primary },
-        ]}
+        style={[styles.inputBox, isFocused && { borderColor: light.Primary }]}
         activeOpacity={0.8}
       >
         {/* Icon bên trái */}
         <FontAwesomeIcon
           icon={faCalendar}
           size={20}
-          style={[
-            styles.leftIcon,
-            isFocused && { color: light.Primary },
-          ]}
+          style={[styles.leftIcon, isFocused && { color: light.Primary }]}
         />
 
         {/* Ngày hiển thị */}
@@ -46,10 +46,7 @@ const DatePickerInput = () => {
         <FontAwesomeIcon
           icon={faChevronDown}
           size={20}
-          style={[
-            styles.rightIcon,
-            isFocused && { color: light.Primary },
-          ]}
+          style={[styles.rightIcon, isFocused && { color: light.Primary }]}
         />
       </TouchableOpacity>
 
@@ -61,14 +58,15 @@ const DatePickerInput = () => {
             onChange={({ date }) => {
               setSelected(date);
               setShow(false);
-              setIsFocused(false);
+              if (onChange && date) {
+                onChange(date.toISOString().slice(0, 10));
+              }
             }}
             mode="single"
             styles={{
-              
               ...defaultStyles,
-              day:{
-                color:'black'
+              day: {
+                color: 'black',
               },
               day_label: {
                 color: 'black', // màu chữ label nếu có dùng label riêng
@@ -78,59 +76,59 @@ const DatePickerInput = () => {
                 borderWidth: 1,
                 borderRadius: '50%',
               },
-              today_label:{
-                color: light.Primary
+              today_label: {
+                color: light.Primary,
               },
               selected: {
                 backgroundColor: light.Primary,
                 borderRadius: '50%',
               },
               selected_label: { color: 'white' },
-              header:{
+              header: {
                 backgroundColor: light.Primary,
                 color: light.Primary,
               },
-              month:{
+              month: {
                 borderColor: light.Primary,
-                borderWidth:1,
-                borderRadius:8
+                borderWidth: 1,
+                borderRadius: 8,
               },
               month_label: {
                 color: light.Primary, // Màu chữ tháng
                 fontWeight: 'bold',
               },
-              month_selector:{
-                backgroundColor: light.Primary
+              month_selector: {
+                backgroundColor: light.Primary,
               },
-              month_selector_label:{
-                color:'white',
+              month_selector_label: {
+                color: 'white',
               },
               year_label: {
                 color: light.Primary, // Màu chữ năm
                 fontWeight: 'bold',
               },
-              year:{
+              year: {
                 borderColor: light.Primary,
-                borderWidth:1,
-                borderRadius:8
+                borderWidth: 1,
+                borderRadius: 8,
               },
-              active_year_label:{
-                color: 'white'
+              active_year_label: {
+                color: 'white',
               },
-              active_year:{
-                backgroundColor: light.Primary
+              active_year: {
+                backgroundColor: light.Primary,
               },
-              selected_year:{
-                backgroundColor: light.Primary
+              selected_year: {
+                backgroundColor: light.Primary,
               },
-              selected_year_label:{
-                color: 'white'
+              selected_year_label: {
+                color: 'white',
               },
-              selected_month:{
-                backgroundColor: light.Primary
+              selected_month: {
+                backgroundColor: light.Primary,
               },
-              selected_month_label:{
-                color: 'white'
+              selected_month_label: {
+                color: 'white',
               },
             }}
           />
