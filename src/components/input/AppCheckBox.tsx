@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react'; // Bỏ useState
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import light from '../../theme/light';
@@ -9,15 +9,19 @@ type AppCheckBoxProps = {
   label?: string;
   onValueChange?: (value: boolean) => void;
   size?: number;
+  checked: boolean; // <-- THÊM PROP `checked` VÀO ĐÂY
 };
 let sizeLabel = 14;
-const AppCheckBox = ({ label = 'Tôi đồng ý điều khoản', onValueChange, size }: AppCheckBoxProps) => {
-    sizeLabel = size ? size : 14;
-  const [checked, setChecked] = useState(false);
+const AppCheckBox = ({
+  label = 'Tôi đồng ý điều khoản',
+  onValueChange,
+  size,
+  checked,
+}: AppCheckBoxProps) => {
+  sizeLabel = size ? size : 14;
 
   const toggleCheckbox = () => {
     const newValue = !checked;
-    setChecked(newValue);
     if (onValueChange) {
       onValueChange(newValue);
     }
@@ -26,10 +30,9 @@ const AppCheckBox = ({ label = 'Tôi đồng ý điều khoản', onValueChange,
   return (
     <TouchableOpacity style={styles.container} onPress={toggleCheckbox}>
       <FontAwesomeIcon
-        icon={checked ? faSquareCheck  : faSquare}
+        icon={checked ? faSquareCheck : faSquare}
         size={20}
         color={light.Primary}
-        // style={{ backgroundColor: 'white'}}
       />
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>

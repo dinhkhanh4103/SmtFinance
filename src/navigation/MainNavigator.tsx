@@ -1,6 +1,6 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { View, Text } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/home/HomeScreen';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -98,133 +98,354 @@ import ContactProfileScreen from '../screens/contacts/ContactProfileScreen';
 
 
 
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import DataLocal from '../utils/local/DataLocal';
+import { isTokenExpired } from '../utils/formatDate';
+import { refreshAccessToken } from '../api/AppNetworking';
+import { StatusLogin } from '../redux/loginSlice';
+import AuthNavigator from './AuthNavigator';
 const Stack = createStackNavigator();
 
-
 const MainNavigator = () => {
+  const isLogin = useSelector((state: RootState) => state.loginSlice.state);
+  React.useEffect(() => {
+    // This hook will run whenever the 'isLogin' state changes.
+    // If it becomes true, and we are not on a main screen, navigate.
+    if (isLogin) {
+      // You could dispatch an action to clear a navigation stack
+      // or simply navigate to a specific main screen.
+      // For example, to navigate to the MainTabs:
+      // navigation.reset({
+      //   index: 0,
+      //   routes: [{ name: 'MainTabs' }],
+      // });
+      console.log('User is logged in, now rendering main app.');
+    } else {
+      console.log('User is logged out, now rendering AuthNavigator.');
+    }
+  }, [isLogin]);
+  __DEV__ && console.log('MainNavigator : ', isLogin);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = React.useState(true);
+  React.useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        console.log('Bắt đầu kiểm tra trạng thái đăng nhập...');
+        // Lấy dữ liệu từ DataLocal và in ra để debug
+        await DataLocal.getStatusLogin();
+        console.log('1. Giá trị isLogin từ AsyncStorage:', DataLocal.isLogin);
+
+        await DataLocal.getAccessToken();
+        console.log('2. AccessToken từ AsyncStorage:', DataLocal.accessToken);
+
+        await DataLocal.getRefreshToken();
+        console.log('3. RefreshToken từ AsyncStorage:', DataLocal.refreshToken);
+
+        await DataLocal.getTimeToken();
+        console.log('4. TimeToken từ AsyncStorage:', DataLocal.time_token);
+
+        await DataLocal.getInfoUser();
+        console.log('5. UserInfo từ AsyncStorage:', DataLocal.userInfo);
+
+        // Kiểm tra và cập nhật trạng thái đăng nhập
+        if (
+          DataLocal.isLogin &&
+          DataLocal.accessToken &&
+          DataLocal.refreshToken &&
+          DataLocal.userInfo &&
+          Object.keys(DataLocal.userInfo).length > 0
+        ) {
+          // Chỉ dispatch StatusLogin(true) khi tất cả dữ liệu cần thiết đều có
+          console.log(
+            'Tất cả dữ liệu đăng nhập đã được tìm thấy. Đang dispatch StatusLogin(true)',
+          );
+          dispatch(StatusLogin(true));
+        } else {
+          // Nếu thiếu một trong các dữ liệu, coi như chưa đăng nhập
+          console.log(
+            'Thiếu dữ liệu đăng nhập. Đang dispatch StatusLogin(false)',
+          );
+          dispatch(StatusLogin(false));
+        }
+      } catch (error) {
+        console.error('Lỗi khi kiểm tra trạng thái đăng nhập:', error);
+        dispatch(StatusLogin(false));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkLoginStatus();
+  }, [dispatch]);
+
   return (
-    <Stack.Navigator initialRouteName='MainTabs' screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='MainTabs' component={BottomTabNavigator} />
-      <Stack.Screen name='BiometricScreen' component={BiometricScreen}/>
-      <Stack.Screen name='HomeScreen' component={HomeScreen} />
+    <>
+      {isLogin ? (
+        <Stack.Navigator
+          initialRouteName="MainTabs"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
+          <Stack.Screen name="BiometricScreen" component={BiometricScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
-      <Stack.Screen name='SearchScreen' component={SearchScreen}/>
+          <Stack.Screen name="SearchScreen" component={SearchScreen} />
 
-      <Stack.Screen name='SearchSupportScreen' component={SearchSupportScreen}/>
+          <Stack.Screen
+            name="SearchSupportScreen"
+            component={SearchSupportScreen}
+          />
 
-      <Stack.Screen name='RequestDetailScreen' component={RequestDetailScreen}/>
-      <Stack.Screen name='SearchCategoriesSupportScreen'  component={SearchCategoriesSupportScreen}/>
+          <Stack.Screen
+            name="RequestDetailScreen"
+            component={RequestDetailScreen}
+          />
+          <Stack.Screen
+            name="SearchCategoriesSupportScreen"
+            component={SearchCategoriesSupportScreen}
+          />
 
-      <Stack.Screen name='CheckInformationLoanScreen' component={CheckInformationLoanScreen}/>
-      <Stack.Screen name='CheckInformationLoanScreen_2' component={CheckInformationLoanScreen_2}/>
-      <Stack.Screen name='CheckInformationLoanScreen_3' component={CheckInformationLoanScreen_3}/>
-      <Stack.Screen name='CheckInformationLoanScreen_4' component={CheckInformationLoanScreen_4}/>
-      <Stack.Screen name='CheckInformationLoanScreen_5' component={CheckInformationLoanScreen_5}/>
-      <Stack.Screen name='CheckInformationLoanScreen_6' component={CheckInformationLoanScreen_6}/>
-      <Stack.Screen name='LoanSuccessScreen' component={LoanSuccessScreen}/>
+          <Stack.Screen
+            name="CheckInformationLoanScreen"
+            component={CheckInformationLoanScreen}
+          />
+          <Stack.Screen
+            name="CheckInformationLoanScreen_2"
+            component={CheckInformationLoanScreen_2}
+          />
+          <Stack.Screen
+            name="CheckInformationLoanScreen_3"
+            component={CheckInformationLoanScreen_3}
+          />
+          <Stack.Screen
+            name="CheckInformationLoanScreen_4"
+            component={CheckInformationLoanScreen_4}
+          />
+          <Stack.Screen
+            name="CheckInformationLoanScreen_5"
+            component={CheckInformationLoanScreen_5}
+          />
+          <Stack.Screen
+            name="CheckInformationLoanScreen_6"
+            component={CheckInformationLoanScreen_6}
+          />
+          <Stack.Screen
+            name="LoanSuccessScreen"
+            component={LoanSuccessScreen}
+          />
 
-      <Stack.Screen name="PeriodicPaymentQR" component={PeriodicPaymentQR}/>
-      <Stack.Screen name='PeriodicPaymentSuccessScreen' component={PeriodicPaymentSuccess}/>
-      <Stack.Screen name='PrePaymentScreen' component={PrePaymentScreen}/>
-      <Stack.Screen name='PaymentSuccessScreen' component={PaymentSuccessScreen}/>
-      <Stack.Screen name='PaymentErrorScreen' component={PaymentErrorScreen}/>
-      <Stack.Screen name='PeriodicPaymentScreen' component={PeriodicPaymentScreen}/>
-
-
-      <Stack.Screen name='ChatRoomScreen' component={ChatRoom}/>
-
-      <Stack.Screen name='TransactionPointScreen' component={TransactionPointScreen}/>
-
-      <Stack.Screen name='CheckCallCapitalScreen_1' component={CheckCallCapitalScreen_1}/>
-      <Stack.Screen name='CheckCallCapitalScreen_2' component={CheckCallCapitalScreen_2}/>
-      <Stack.Screen name='CheckCallCapitalScreen_3' component={CheckCallCapitalScreen_3}/>
-      <Stack.Screen name='CheckCallCapitalScreen_4' component={CheckCallCapitalScreen_4}/>
-      <Stack.Screen name='CheckCallCapitalScreen_5' component={CheckCallCapitalScreen_5}/>
-      <Stack.Screen name='CheckCallCapitalScreen_6' component={CheckCallCapitalScreen_6}/>
-      <Stack.Screen name='CreateCallCapitalSucces' component={CreateCallCapitalSucces}/>
-      <Stack.Screen name='HistoriesTradeScreen' component={HistoriesTradeScreen}/>
-
-      <Stack.Screen name='InvestFundraisingScreen' component={InvestFundraisingScreen}/>
-      <Stack.Screen name='CheckInvestScreen_1' component={CheckInvestScreen_1}/>
-      <Stack.Screen name='CheckInvestScreen_2' component={CheckInvestScreen_2}/>
-      <Stack.Screen name='CheckInvestScreen_3' component={CheckInvestScreen_3}/>
-      <Stack.Screen name='CheckInvestScreen_4' component={CheckInvestScreen_4}/>
-      <Stack.Screen name='CheckInvestScreen_5' component={CheckInvestScreen_5}/>
-      <Stack.Screen name='CheckInvestScreen_6' component={CheckInvestScreen_6}/>
-      <Stack.Screen name='InvestSuccessScreen' component={InvestSuccessScreen}/>
-
-      <Stack.Screen name='BorrowerInformationScreen_1' component={BorrowerInformationScreen_1}/>
-      <Stack.Screen name='BorrowerInformationScreen_2' component={BorrowerInformationScreen_2}/>
-      <Stack.Screen name='BorrowerInformationScreen_3' component={BorrowerInformationScreen_3}/>
-      <Stack.Screen name='BorrowerInformationScreen_4' component={BorrowerInformationScreen_4}/>
-      <Stack.Screen name='BorrowerInformationScreen_5' component={BorrowerInformationScreen_5}/>
-      <Stack.Screen name='BorrowerInformationScreen_6' component={BorrowerInformationScreen_6}/>
-
-      <Stack.Screen name='LoanListScreen' component={LoanListScreen}/>
-      <Stack.Screen name='LoanDetailScreen' component={LoanDetailScreen}/>
-      <Stack.Screen name='HistoriesLoanScreen' component={HistoriesLoanScreen}/>
-      <Stack.Screen name='LoanOnlineProposalScreen' component={LoanOnlineProposalScreen}/>
-
-      <Stack.Screen name='LoanQuickProposalScreen' component={LoanQuickProposalScreen}/>
-      <Stack.Screen name='CheckQuickLoanScreen_1' component={CheckQuickLoanScreen_1}/>
-      <Stack.Screen name='CheckQuickLoanScreen_2' component={CheckQuickLoanScreen_2}/>
-      <Stack.Screen name='CheckQuickLoanScreen_3' component={CheckQuickLoanScreen_3}/>
-      <Stack.Screen name='CustomCameraScreen' component={CustomCameraScreen}/>
-
-      <Stack.Screen name='InformationScreen' component={InformationScreen}/>
-      <Stack.Screen name='AboutScreen' component={AboutScreen}/>
-      <Stack.Screen name='SecurityScreen' component={SecurityScreen}/>
-      <Stack.Screen name='RatingsScreen' component={RatingsScreen}/>
-      <Stack.Screen name='FavoritesItem' component={FavoritesItem}/>
-      <Stack.Screen name='TernConditionScreen' component={TernConditionScreen}/>
-      
-
-      <Stack.Screen name={'BankLinkScreen'} component={BankLinkScreen}/>
-      <Stack.Screen name={'AddBankScreen'} component={AddBankScreen}/>
-      <Stack.Screen name={'AuthSmsOTPScreen'} component={AuthSmsOTPScreen}/>
-      <Stack.Screen name={'AddBankSuccessScreen'} component={AddBankSuccessScreen}/>
+          <Stack.Screen name="PeriodicPaymentQR" component={PeriodicPaymentQR}/>
+          <Stack.Screen name='PeriodicPaymentSuccessScreen' component={PeriodicPaymentSuccess}/>
+          <Stack.Screen name='PrePaymentScreen' component={PrePaymentScreen}/>
+          <Stack.Screen name='PaymentSuccessScreen' component={PaymentSuccessScreen}/>
+          <Stack.Screen name='PaymentErrorScreen' component={PaymentErrorScreen}/>
+          <Stack.Screen name='PeriodicPaymentScreen' component={PeriodicPaymentScreen}/>
 
 
-      <Stack.Screen name='VerificationInformationScreen_1' component={VerificationInformationScreen_1}/>
-      <Stack.Screen name='VerificationInformationScreen_2' component={VerificationInformationScreen_2}/>
+          <Stack.Screen name="ChatRoomScreen" component={ChatRoom} />
 
-      <Stack.Screen name='LanguageScreen' component={LanguageScreen}/>
+          <Stack.Screen
+            name="TransactionPointScreen"
+            component={TransactionPointScreen}
+          />
 
-      <Stack.Screen name='NotificationScreen' component={NotificationScreen}/>
+          <Stack.Screen
+            name="CheckCallCapitalScreen_1"
+            component={CheckCallCapitalScreen_1}
+          />
+          <Stack.Screen
+            name="CheckCallCapitalScreen_2"
+            component={CheckCallCapitalScreen_2}
+          />
+          <Stack.Screen
+            name="CheckCallCapitalScreen_3"
+            component={CheckCallCapitalScreen_3}
+          />
+          <Stack.Screen
+            name="CheckCallCapitalScreen_4"
+            component={CheckCallCapitalScreen_4}
+          />
+          <Stack.Screen
+            name="CheckCallCapitalScreen_5"
+            component={CheckCallCapitalScreen_5}
+          />
+          <Stack.Screen
+            name="CheckCallCapitalScreen_6"
+            component={CheckCallCapitalScreen_6}
+          />
+          <Stack.Screen
+            name="CreateCallCapitalSucces"
+            component={CreateCallCapitalSucces}
+          />
+          <Stack.Screen
+            name="HistoriesTradeScreen"
+            component={HistoriesTradeScreen}
+          />
 
-      <Stack.Screen name='HistoriesScoreScreen' component={HistoriesScoreScreen}/>
-      <Stack.Screen name='TipScoreScreen' component={TipScoreScreen}/>
-      <Stack.Screen name='InformationScoreScreen' component={InformationScoreScreen}/>
+          <Stack.Screen
+            name="InvestFundraisingScreen"
+            component={InvestFundraisingScreen}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_1"
+            component={CheckInvestScreen_1}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_2"
+            component={CheckInvestScreen_2}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_3"
+            component={CheckInvestScreen_3}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_4"
+            component={CheckInvestScreen_4}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_5"
+            component={CheckInvestScreen_5}
+          />
+          <Stack.Screen
+            name="CheckInvestScreen_6"
+            component={CheckInvestScreen_6}
+          />
+          <Stack.Screen
+            name="InvestSuccessScreen"
+            component={InvestSuccessScreen}
+          />
 
-      <Stack.Screen name='TopUpScreen' component={TopUpScreen}/>
-      <Stack.Screen name='PaymentTopUpScreen' component={PaymentTopUpScreen}/>
+          <Stack.Screen
+            name="BorrowerInformationScreen_1"
+            component={BorrowerInformationScreen_1}
+          />
+          <Stack.Screen
+            name="BorrowerInformationScreen_2"
+            component={BorrowerInformationScreen_2}
+          />
+          <Stack.Screen
+            name="BorrowerInformationScreen_3"
+            component={BorrowerInformationScreen_3}
+          />
+          <Stack.Screen
+            name="BorrowerInformationScreen_4"
+            component={BorrowerInformationScreen_4}
+          />
+          <Stack.Screen
+            name="BorrowerInformationScreen_5"
+            component={BorrowerInformationScreen_5}
+          />
+          <Stack.Screen
+            name="BorrowerInformationScreen_6"
+            component={BorrowerInformationScreen_6}
+          />
 
-      <Stack.Screen name='TransferBankCSScreen' component={TransferBankCSScreen}/>
-      <Stack.Screen name='PaymentTransferScreen' component={PaymentTransferScreen}/>
-      <Stack.Screen name='ResultTransferScreen' component={ResultTransferScreen}/>
-      <Stack.Screen name='TransferBankScreen' component={TransferBankScreen}/>
-      <Stack.Screen name='SelectBankScreen' component={SelectBankScreen}/>
-      <Stack.Screen name='ContactsScreen' component={ContactsScreen}/>
+          <Stack.Screen name="LoanListScreen" component={LoanListScreen} />
+          <Stack.Screen name="LoanDetailScreen" component={LoanDetailScreen} />
+          <Stack.Screen
+            name="HistoriesLoanScreen"
+            component={HistoriesLoanScreen}
+          />
+          <Stack.Screen
+            name="LoanOnlineProposalScreen"
+            component={LoanOnlineProposalScreen}
+          />
 
-      <Stack.Screen name='TradeScreen' component={TradeScreen}/>
+          <Stack.Screen
+            name="LoanQuickProposalScreen"
+            component={LoanQuickProposalScreen}
+          />
+          <Stack.Screen
+            name="CheckQuickLoanScreen_1"
+            component={CheckQuickLoanScreen_1}
+          />
+          <Stack.Screen
+            name="CheckQuickLoanScreen_2"
+            component={CheckQuickLoanScreen_2}
+          />
+          <Stack.Screen
+            name="CheckQuickLoanScreen_3"
+            component={CheckQuickLoanScreen_3}
+          />
+          <Stack.Screen
+            name="CustomCameraScreen"
+            component={CustomCameraScreen}
+          />
 
-      <Stack.Screen name='ShoppingScreen' component={ShoppingScreen}/>
-      <Stack.Screen name='FlightTicketScreen' component={FlightTicketScreen}/>
+          <Stack.Screen name='InformationScreen' component={InformationScreen}/>
+          <Stack.Screen name='AboutScreen' component={AboutScreen}/>
+          <Stack.Screen name='SecurityScreen' component={SecurityScreen}/>
+          <Stack.Screen name='RatingsScreen' component={RatingsScreen}/>
+          <Stack.Screen name='FavoritesItem' component={FavoritesItem}/>
+          <Stack.Screen name='TernConditionScreen' component={TernConditionScreen}/>
+          
 
-      <Stack.Screen name='FingerprintSecurityScreen' component={FingerprintSecurityScreen}/>
-      <Stack.Screen name='FingerprintSuccessScreen' component={FingerprintSuccessScreen}/>
-      <Stack.Screen name='FaceSecurityScreen' component={FaceSecurityScreen}/>
-      <Stack.Screen name='FaceSuccessScreen' component={FaceSuccessScreen}/>
+          <Stack.Screen name={'BankLinkScreen'} component={BankLinkScreen}/>
+          <Stack.Screen name={'AddBankScreen'} component={AddBankScreen}/>
+          <Stack.Screen name={'AuthSmsOTPScreen'} component={AuthSmsOTPScreen}/>
+          <Stack.Screen name={'AddBankSuccessScreen'} component={AddBankSuccessScreen}/>
 
-      <Stack.Screen name='SupportConsultationScreen' component={SupportConsultationScreen}/>
-      <Stack.Screen name='FAQScreen' component={FAQScreen}/>
-      <Stack.Screen name='SendRequestSupportScreen' component={SendRequestSupportScreen}/>
-      <Stack.Screen name='QuestionScreen' component={QuestionScreen}/>
 
-      <Stack.Screen name='ContactProfileScreen' component={ContactProfileScreen}/>
+          <Stack.Screen
+            name="VerificationInformationScreen_1"
+            component={VerificationInformationScreen_1}
+          />
+          <Stack.Screen
+            name="VerificationInformationScreen_2"
+            component={VerificationInformationScreen_2}
+          />
 
-      {/* <Stack.Screen name='RequestSupport' component={RequestSupport}/> */}
-    </Stack.Navigator>
+          <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+
+          <Stack.Screen
+            name="NotificationScreen"
+            component={NotificationScreen}
+          />
+
+          <Stack.Screen
+            name="HistoriesScoreScreen"
+            component={HistoriesScoreScreen}
+          />
+          <Stack.Screen name="TipScoreScreen" component={TipScoreScreen} />
+          <Stack.Screen
+            name="InformationScoreScreen"
+            component={InformationScoreScreen}
+          />
+
+          <Stack.Screen name='TopUpScreen' component={TopUpScreen}/>
+          <Stack.Screen name='PaymentTopUpScreen' component={PaymentTopUpScreen}/>
+
+          <Stack.Screen name='TransferBankCSScreen' component={TransferBankCSScreen}/>
+          <Stack.Screen name='PaymentTransferScreen' component={PaymentTransferScreen}/>
+          <Stack.Screen name='ResultTransferScreen' component={ResultTransferScreen}/>
+          <Stack.Screen name='TransferBankScreen' component={TransferBankScreen}/>
+          <Stack.Screen name='SelectBankScreen' component={SelectBankScreen}/>
+          <Stack.Screen name='ContactsScreen' component={ContactsScreen}/>
+
+          <Stack.Screen name='TradeScreen' component={TradeScreen}/>
+
+          <Stack.Screen name='ShoppingScreen' component={ShoppingScreen}/>
+          <Stack.Screen name='FlightTicketScreen' component={FlightTicketScreen}/>
+
+          <Stack.Screen name='FingerprintSecurityScreen' component={FingerprintSecurityScreen}/>
+          <Stack.Screen name='FingerprintSuccessScreen' component={FingerprintSuccessScreen}/>
+          <Stack.Screen name='FaceSecurityScreen' component={FaceSecurityScreen}/>
+          <Stack.Screen name='FaceSuccessScreen' component={FaceSuccessScreen}/>
+
+          <Stack.Screen name='SupportConsultationScreen' component={SupportConsultationScreen}/>
+          <Stack.Screen name='FAQScreen' component={FAQScreen}/>
+          <Stack.Screen name='SendRequestSupportScreen' component={SendRequestSupportScreen}/>
+          <Stack.Screen name='QuestionScreen' component={QuestionScreen}/>
+
+          <Stack.Screen name='ContactProfileScreen' component={ContactProfileScreen}/>
+
+          {/* <Stack.Screen name='RequestSupport' component={RequestSupport}/> */}
+        </Stack.Navigator>
+      ) : (
+        <AuthNavigator />
+      )}
+    </>
   );
 };
 
