@@ -382,5 +382,16 @@ module.exports = {
   "all": "All",
   "payment_successful": "Payment successful",
   "payment_failed": "Payment failed",
-  "payment_failed_insufficient_balance": "Payment failed due to insufficient balance in your account. Please try again or change the payment method"
+  "payment_failed_insufficient_balance": "Payment failed due to insufficient balance in your account. Please try again or change the payment method",
+  "password_min_6_characters": "Mật khẩu phải có ít nhất 6 ký tự",
+  "password_must_contain_uppercase": "Mật khẩu phải có ít nhất một chữ cái viết hoa",
+  "password_must_contain_number": "Mật khẩu phải có ít nhất một chữ số",
+  "password_required": "Vui lòng nhập mật khẩu",
+  "passwords_must_match": "Mật khẩu nhập lại không khớp",
+  "confirm_password_required": "Vui lòng nhập lại mật khẩu",
+  "invalid_email_format": "Định dạng email không hợp lệ",
+  "email_required": "Vui lòng nhập email",
+  "full_name_required": "Vui lòng nhập họ và tên",
+  "date_of_birth_required": "Vui lòng nhập ngày sinh",
+  "gender_required": "Vui lòng chọn giới tính"
 };

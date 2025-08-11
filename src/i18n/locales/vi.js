@@ -382,5 +382,16 @@ module.exports = {
   "all": "Toàn bộ",
   "payment_successful": "Thanh toán thành công",
   "payment_failed": "Thanh toán thất bại",
-  "payment_failed_insufficient_balance": "Thanh toán thất bại do tài khoản của bạn không đủ số dư. Vui lòng thử lại hoặc đổi phương thức thanh toán"
+  "payment_failed_insufficient_balance": "Thanh toán thất bại do tài khoản của bạn không đủ số dư. Vui lòng thử lại hoặc đổi phương thức thanh toán",
+  "password_min_6_characters": "Mật khẩu phải có ít nhất 6 ký tự",
+  "password_must_contain_uppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa",
+  "password_must_contain_number": "Mật khẩu phải chứa ít nhất một chữ số",
+  "password_required": "Mật khẩu không được để trống",
+  "passwords_must_match": "Mật khẩu xác nhận không khớp",
+  "confirm_password_required": "Xác nhận mật khẩu không được để trống",
+  "invalid_email_format": "Địa chỉ email không hợp lệ",
+  "email_required": "Email không được để trống",
+  "full_name_required": "Họ và tên không được để trống",
+  "date_of_birth_required": "Ngày sinh không được để trống",
+  "gender_required": "Giới tính không được để trống"
 };
